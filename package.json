@@ -1,0 +1,17 @@
+{
+  "name": "voting",
+  "version": "1.0.0",
+  "description": "This is a voting system using blockchain technology",
+  "main": "index.js",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.1",
+    "openzeppelin-solidity": "^2.5.1",
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

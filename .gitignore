@@ -1,0 +1,21 @@
+# dependencies
+node_modules
+
+# truffle
+build
+
+# json files
+settings.json
+
+# environment variables
+mnemonic.env
+
+# auto-generated files
+package-lock.json
+bs-config.json
+
+# testing
+testing.py
+
+#virtual environment
+venv
