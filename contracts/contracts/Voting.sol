@@ -1,6 +1,8 @@
 pragma solidity 0.4.24;
 
-contract Election {
+import "../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+
+contract Election is ERC20 {
     struct Candidate {
         uint id;
         string name;
@@ -33,7 +35,7 @@ contract Election {
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
 
-    function end () public {
+    function endNow () public {
         goingon = false;
     }
 
