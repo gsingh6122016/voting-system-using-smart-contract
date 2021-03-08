@@ -9,67 +9,77 @@ from web3 import Web3
 rpc = "HTTP://127.0.0.1:7545"
 
 web3 = Web3(Web3.HTTPProvider(rpc))
-abi = '[{"constant": false,"inputs": [{"name": "_candidateId","type": "uint256"}],"name": "vote","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": true,"inputs": [],"name": "candidatesCount","outputs":[{"name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"	},{		"constant": true,		"inputs": [			{				"name": "",				"type": "uint256"			}		],		"name": "candidates",		"outputs": [			{				"name": "id",				"type": "uint256"			},			{				"name": "name",				"type": "string"			},			{				"name": "voteCount",				"type": "uint256"			}		],		"payable": false,		"stateMutability": "view",		"type": "function"	},	{		"constant": true,		"inputs": [			{				"name": "",				"type": "address"			}		],		"name": "voters",		"outputs": [			{				"name": "",				"type": "bool"			}		],		"payable": false,		"stateMutability": "view",		"type": "function"	},	{		"constant": false,		"inputs": [],		"name": "end",		"outputs": [],		"payable": false,		"stateMutability": "nonpayable","type": "function"	},{"inputs": [],"payable": false,"stateMutability": "nonpayable","type": "constructor"},{"anonymous": false,"inputs": [{"indexed": true,"name": "_candidateId","type": "uint256"}],"name": "votedEvent","type": "event"	}]'
 
+abi = '[{"constant":false,"inputs":[{"name":"_candidateId","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"candidatesCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidates","outputs":[{"name":"id","type":"uint256"},{"name":"name","type":"string"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"end","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_candidateId","type":"uint256"}],"name":"votedEvent","type":"event"}]'
 
-contract_addr = "0xC3d005F516E7aAA2d08eE32a6e4311D27A319952"
-
+contract_addr = "0x8F4fFf02f84F3332dD03FFFf1Aba14dB505842a0"
 
 app = Flask(__name__)
 app.secret_key = 'i love white chocolate too'
 
 accounts = [ 
-    '0x35e6B58457F5c347522b64cC5D2a7B4605EC16a8',
-    '0x00F60A577C8f9D577300cA35280848C30Faac0F1',
-    '0xDB4B8aBb2Ba9565FD5945f848355531Cb5ed6a4F'
-
+    '0xE4a79650293bb08873deeDF2e9AC9F15e1e4F3f1',
+    '0x40bbbD9B26aC7B31004440506c9eC9c2Ccf8e7c0',
+    '0xb74887C102Ff10012ecFd03FF245E7D9Fb6c0409'
 ]
 
 privatekeys = [
-    '4a4600e80b9e95a6489b1b981a1d5f60d0e8faa953143c026c3b0d5239fd4731',
-    'b722382c98098448325d298622ebfd809d66e176f64650c9ecebe49f44f5e1ac',
-    '7cc068cc378d5473edbd42a8812eb0d3b31e4ad9ef7765c1444d4ec62eacef40',
+    'aed93b732590eb6962293b31c3fad47e342447a02b28ce80c456bf31a1e6f5b3',
+    'fa551b1457c37523094d987be6e5839e5188d476072826bae922508346ceb0df',
+    '02472f4a764a2ef81ec6827f51552fadda9dc6597a438e72b412aa8a6e4e1319',
 ]
 
 vote_tx = []
 voted = []
 ended = 0
 
-# @app.route("/" , methods=['POST'])
-# def home():
-#     if(not ended):
-#         try:
-#             data = eval(request.data) # {"aadhaarID":int(),"candidateID":int()}
-#             aid = int(data["aadhaarID"])-1
-#             if(aid in voted):
-#                 return "Already voted",400
-#             cid = int(data["candidateID"])
-#             acc = accounts[aid]
-#             pvt = privatekeys[aid]
-#             contract = web3.eth.contract(address=contract_addr, abi=abi)
-#             transaction  = contract.functions.vote(cid).buildTransaction()
-#             transaction['nonce'] = web3.eth.getTransactionCount(acc)
+@app.route("/" , methods=['POST'])
+def home():
+    if(not ended):
+        try:
+            data = eval(request.data) # {"aadhaarID":int(),"candidateID":int()}
+            print('data', data)
+            
+            aid = int(data["aadhaarID"])-1
+            print('aid', aid)
+            if(aid in voted):
+                return "Already voted",400
 
-#             signed_tx = web3.eth.account.signTransaction(transaction, pvt)
-#             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-#             vote_tx.append(tx_hash)
-#             voted.append(aid)
-#             return "Vote successfully casted",200
-#         except:
-#             return "Error processing",500
-#     else:
-#         return "Election period ended",400
+            
+            cid = int(data["candidateID"])
+            print('cid', cid)
+            acc = accounts[aid]
+            pvt = privatekeys[aid]
+            print('acc', acc)
+            print('pvt', pvt)
+         
+            contract = web3.eth.contract(address=contract_addr, abi=abi)
+            print('contract', contract)
+            transaction = contract.functions.vote(cid).buildTransaction()
+            print('transaction', transaction)
+            transaction['nonce'] = web3.eth.getTransactionCount(acc)
+            print('transaction nonce', transaction['nonce'])
 
-# @app.route("/results" , methods=['GET'])
-# def count():
-#     if(ended):
-#             res = []
-#             election = web3.eth.contract(address=contract_addr, abi=abi)
-#             for i in range(election.caller().candidatesCount()):    
-#                 res.append(election.caller().candidates(i+1))
-#             return json.dumps(res),200
-#     else:
-#         return "Election still on going",400
+            signed_tx = web3.eth.account.signTransaction(transaction, pvt)
+            tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            vote_tx.append(tx_hash)
+            voted.append(aid)
+            return "Vote successfully casted",200
+        except:
+            return "Error processing",500
+    else:
+        return "Election period ended",400
+
+@app.route("/results" , methods=['GET'])
+def count():
+    if(ended):
+            res = []
+            election = web3.eth.contract(address=contract_addr, abi=abi)
+            for i in range(election.caller().candidatesCount()):    
+                res.append(election.caller().candidates(i+1))
+            return json.dumps(res),200
+    else:
+        return "Election still on going",400
 
 # @app.route("/end" , methods=['POST'])
 # def end_election():
@@ -102,21 +112,20 @@ def candidates_list():
         res = []
 
         election = web3.eth.contract(address=contract_addr, abi=abi)
+        print('election', election)
+
+
      
         for i in range(election.caller().candidatesCount()):    
-            res.append(election.caller().candidates(i+1)[1]) 
+            res.append(election.caller().candidates(i+1)[1])
+            print('candy', election.caller().candidates(i+1)) 
         
         return json.dumps(res),200
     except:
         print('res', res)
         return "Error processing",500
 
-# @app.route("/test" , methods=['GET'])
-# def candidates_list():
-# 	res = []
-# 	contract = web3.eth.contract(address=contract_addr, abi=abi)
-# 	transaction = contract.caller().candidatesCount()
-# 	print('count', transaction)
+
         
 
 if __name__ == '__main__':
