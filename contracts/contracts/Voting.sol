@@ -13,7 +13,7 @@ contract Election  {
 
     event votedEvent (
         uint indexed _candidateId
-    );
+    ); 
 
     constructor () public {
         addCandidate("Candidate 1");
@@ -33,7 +33,7 @@ contract Election  {
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
 
-    function endNow () public {
+    function end () public {
         goingon = false;
     }
 
