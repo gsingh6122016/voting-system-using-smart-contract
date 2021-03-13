@@ -1,0 +1,44 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.top__fix{
+position: fixed;
+top: 0;
+width: 100%;
+}
+
+.place__center{
+    display: grid;
+    place-items: center;
+}
+
+._center {
+    display: flex;
+    justify-content: center;
+}
+
+.form__ctr{
+    width: 500px;
+    height: 200px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.input__ctr {
+
+}

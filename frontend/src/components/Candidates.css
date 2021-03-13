@@ -1,0 +1,115 @@
+
+h4, h1{
+    color: white !important;
+    margin: 0 !important;
+}
+
+.candidates__ctr {
+    background-color: whitesmoke;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.candidates__body {
+    padding: 20px;
+}
+
+.candidates__cards {
+    padding: 10px;
+}
+
+.candidates__header {
+    background-color: #235fd0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    color: #fff;
+}
+
+.candidates__card__head {
+    background-color: #49b5e7;
+    color: white;
+    padding: 10px 30px;
+    border: 2px solid rgba(0,0,0,.125);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.candidates__card {
+    background-color: #fff;
+    padding: 10px 30px;
+    /* border: 2px solid rgba(0,0,0,.125); */
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    transition: 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.candidates__card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+.party__icon {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.btn {
+    display: inline-block;
+    padding: 9px 20px;
+    padding-top: 7px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #42b4ce;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #d1dade;
+    -webkit-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-image: none !important;
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+    transition: all 0.12s linear 0s !important;
+    font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #49b5e7;
+        border-color: #357ebd;
+        }
+
+        .btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            }
+            .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+            border-color: transparent;
+            }
+            .btn-link {
+            color: #5e5e5e;
+            background-color: transparent;
+            border: none;
+            }
+            .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+            border-color: transparent;
+            }
+            .btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
+            }
