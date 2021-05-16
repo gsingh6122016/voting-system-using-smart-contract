@@ -48,9 +48,14 @@ h4, h1{
     border-radius: 3px;
     transition: 0.3s;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     margin: 10px 0;
+}
+.row_3{
+    display: flex;
+    flex:0.25;
+    /* justify-content: center; */
 }
 
 .candidates__card:hover {

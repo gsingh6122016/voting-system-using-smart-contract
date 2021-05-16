@@ -1,6 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import bjpIcon from '../images/bjp.png'
+import incIcon from '../images/congress.png'
+import cpimIcon from '../images/cpim.png'
+import aapIcon from '../images/aap.png'
+import notaIcon from '../images/nota.png'
+import ssIcon from '../images/shivsenajpg.jpg'
+import tmcIcon from '../images/tmc.png'
 import { url } from '../globalUrl';
+
+
+
+let party_icons = {
+    bjp: bjpIcon,
+    inc: incIcon,
+    cpi: cpimIcon,
+    aap: aapIcon,
+    nota: notaIcon,
+    ss: ssIcon,
+    aitc: tmcIcon,
+  };
+
+  let party_names = {
+    bjp: "Bharatiya janta Party",
+    inc: "Indian National Congress",
+    cpi: "communist Party of India",
+    aap: "Aam Aadmi Party",
+    nota: "NOTA",
+    ss: "Shiv Shena",
+    aitc: "All India Trinamool Congress",
+  };
 
 export default function Results() {
 
@@ -39,16 +67,16 @@ export default function Results() {
 
                         <div className='candidates__card__head' >
 
-                            <div >
+                            <div className='row_3' >
                                 <h4>Symbol</h4>
                             </div>
-                            <div  >
+                            <div className='row_3' >
                                 <h4>Candidate Name</h4>
                             </div>
-                            <div  >
+                            <div className='row_3' >
                                 <h4>Party Name</h4>
                             </div>
-                            <div >
+                            <div className='row_3' style={{justifyContent:"center"}} >
                                 <h4>Votes</h4>
                             </div>
 
@@ -58,17 +86,17 @@ export default function Results() {
                             results.map(result=>(
                                 <div className='candidates__card' >
 
-                                <div >
-                                    <img className='party__icon' src={bjpIcon} alt='logo' ></img>
+                                <div className='row_3' >
+                                    <img className='party__icon' src={party_icons[result?.[2]]} alt='logo' ></img>
                                 </div>
-                                <div  >
+                                <div className='row_3'  >
                                     <h5>{result?.[1]}</h5>
                                 </div>
-                                <div  >
-                                    <h5>Bharatiya Janta Party</h5>
+                                <div className='row_3' >
+                                    <h5>{party_names[result?.[2]]}</h5>
                                 </div>
-                                <div >
-                                <h5>{result?.[2]}</h5>
+                                <div className='row_3' style={{justifyContent:"center"}}  >
+                                <h5>{result?.[3]}</h5>
                                 </div>
     
                             </div>

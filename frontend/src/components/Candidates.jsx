@@ -1,10 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import './Candidates.css'
 import bjpIcon from '../images/bjp.png'
+import incIcon from '../images/congress.png'
+import cpimIcon from '../images/cpim.png'
+import aapIcon from '../images/aap.png'
+import notaIcon from '../images/nota.png'
+import ssIcon from '../images/shivsenajpg.jpg'
+import tmcIcon from '../images/tmc.png'
 import 'antd/dist/antd.css';
 import { Popconfirm, message } from 'antd';
 import { url } from '../globalUrl';
 
+let party_icons = {
+    bjp: bjpIcon,
+    inc: incIcon,
+    cpi: cpimIcon,
+    aap: aapIcon,
+    nota: notaIcon,
+    ss: ssIcon,
+    aitc: tmcIcon,
+  };
+  
+  let party_names = {
+    bjp: "Bharatiya janta Party",
+    inc: "Indian National Congress",
+    cpi: "communist Party of India",
+    aap: "Aam Aadmi Party",
+    nota: "NOTA",
+    ss: "Shiv Shena",
+    aitc: "All India Trinamool Congress",
+  };
 
 
 export default function Candidates() {
@@ -13,7 +38,7 @@ export default function Candidates() {
 
     useEffect(() => {
 
-        fetch(url + '/candidates_list', {
+        fetch(url + '/results', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -88,35 +113,36 @@ export default function Candidates() {
 
                         <div className='candidates__card__head' >
 
-                            <div >
+                            <div className='row_3' >
                                 <h4>Symbol</h4>
                             </div>
-                            <div  >
+                            <div className='row_3' >
                                 <h4>Candidate Name</h4>
                             </div>
-                            <div  >
+                            <div className='row_3' >
                                 <h4>Party Name</h4>
                             </div>
-                            <div >
+                            <div className='row_3' style={{justifyContent:"flex-end"}} >
                                 <h4>Action</h4>
                             </div>
 
                         </div>
 
                         {
-                            candidates.map((candidate, index) => (
+                            candidates.map((result, index) => (
                                 <div className='candidates__card' key={index} >
 
-                                <div >
-                                    <img className='party__icon' src={bjpIcon} alt='logo' ></img>
+                                <div className='row_3' >
+                                    <img className='party__icon' src={party_icons[result?.[2]]} alt='logo' ></img>
                                 </div>
-                                <div  >
-                                    <h5>{candidate}</h5>
+
+                                <div className='row_3'  >
+                                    <h5>{result?.[1]}</h5>
                                 </div>
-                                <div  >
-                                    <h5>Bharatiya Janta Party</h5>
+                                <div className='row_3'  >
+                                    <h5>{party_names[result?.[2]]}</h5>
                                 </div>
-                                <div >
+                                <div className='row_3' style={{justifyContent:"flex-end"}} >
                                     <Popconfirm
                                         title="Are you sure to vote this candidate?"
                                         onConfirm={()=>confirm(index)}
