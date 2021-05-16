@@ -4,6 +4,13 @@ h4, h1{
     margin: 0 !important;
 }
 
+.spinner{
+    display: flex;
+    width: 100%;
+    margin-top: 180px;
+    justify-content: center;
+}
+
 .candidates__ctr {
     background-color: whitesmoke;
     height: 100vh;
@@ -67,6 +74,11 @@ h4, h1{
     height: 80px;
     object-fit: cover;
 }
+.right{
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
 
 .btn {
     display: inline-block;
@@ -118,3 +130,4 @@ h4, h1{
             -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.15),0 1px 1px rgba(0,0,0,0.075);
             }
+

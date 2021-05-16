@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom";
 import './Candidates.css'
 import bjpIcon from '../images/bjp.png'
 import incIcon from '../images/congress.png'
@@ -10,6 +11,7 @@ import tmcIcon from '../images/tmc.png'
 import 'antd/dist/antd.css';
 import { Popconfirm, message } from 'antd';
 import { url } from '../globalUrl';
+import { Spin} from 'antd';
 
 let party_icons = {
     bjp: bjpIcon,
@@ -35,6 +37,8 @@ let party_icons = {
 export default function Candidates() {
 
     const [candidates, setCandidates] = useState([]);
+
+    let history = useHistory();
 
     useEffect(() => {
 
@@ -79,7 +83,8 @@ export default function Candidates() {
             .then((response) => {
                 console.log('response', response)
                 if (response['status'] === 201 || response['status'] === 200) {
-                    message.success('Vote Submitted Successfully!');
+                    // message.success('Vote Submitted Successfully!');
+                    history.replace('/Voted');
                     return response.json()
                 }
                 else {
@@ -127,8 +132,16 @@ export default function Candidates() {
                             </div>
 
                         </div>
-
                         {
+                            candidates.length==0 ? 
+                            <div className='spinner'>
+                            <Spin size="large" />
+                            </div>
+
+
+                            :
+<>
+{
                             candidates.map((result, index) => (
                                 <div className='candidates__card' key={index} >
 
@@ -159,7 +172,9 @@ export default function Candidates() {
                             </div>
                             ))
                         }
+</>
 
+                    }
 
 
 

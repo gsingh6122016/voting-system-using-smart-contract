@@ -7,7 +7,7 @@ import notaIcon from '../images/nota.png'
 import ssIcon from '../images/shivsenajpg.jpg'
 import tmcIcon from '../images/tmc.png'
 import { url } from '../globalUrl';
-
+import { Spin} from 'antd';
 
 
 let party_icons = {
@@ -83,24 +83,36 @@ export default function Results() {
                         </div>
 
                         {
-                            results.map(result=>(
-                                <div className='candidates__card' >
-
-                                <div className='row_3' >
-                                    <img className='party__icon' src={party_icons[result?.[2]]} alt='logo' ></img>
-                                </div>
-                                <div className='row_3'  >
-                                    <h5>{result?.[1]}</h5>
-                                </div>
-                                <div className='row_3' >
-                                    <h5>{party_names[result?.[2]]}</h5>
-                                </div>
-                                <div className='row_3' style={{justifyContent:"center"}}  >
-                                <h5>{result?.[3]}</h5>
-                                </div>
-    
+                            results.length==0 ? 
+                            <div className='spinner'>
+                            <Spin size="large" />
                             </div>
-                            ))
+
+
+                            :
+                            <>
+{
+                                results.map(result=>(
+                                    <div className='candidates__card' >
+    
+                                    <div className='row_3' >
+                                        <img className='party__icon' src={party_icons[result?.[2]]} alt='logo' ></img>
+                                    </div>
+                                    <div className='row_3'  >
+                                        <h5>{result?.[1]}</h5>
+                                    </div>
+                                    <div className='row_3' >
+                                        <h5>{party_names[result?.[2]]}</h5>
+                                    </div>
+                                    <div className='row_3' style={{justifyContent:"center"}}  >
+                                    <h5>{result?.[3]}</h5>
+                                    </div>
+        
+                                </div>
+                                ))
+}
+                            </>
+
                         }
 
 

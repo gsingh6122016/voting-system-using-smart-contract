@@ -9,11 +9,12 @@ from flask_cors import CORS
 
 rpc = "http://127.0.0.1:7545"
 
+
 web3 = Web3(Web3.HTTPProvider(rpc))
 
 abi = json.loads('[{"constant":false,"inputs":[{"name":"_candidateId","type":"uint256"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"candidatesCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidates","outputs":[{"name":"id","type":"uint256"},{"name":"name","type":"string"},{"name":"party","type":"string"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"voters","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]')
 
-contract_addr = web3.toChecksumAddress("0x8996c8C51aa662029C8aa197c225069D4Db85809")
+contract_addr = web3.toChecksumAddress("0xd620514E9AfE39A6B68F23783Ef605F375daDfFd")
 
 app = Flask(__name__)
 CORS(app)
@@ -21,22 +22,18 @@ app.secret_key = 'i love white chocolate too'
 
 
 accounts = [ 
-    '0x8817bDcBCf71b015CCA177e1751209CCA6d806ba',
-    '0x9F02e224FD2e5fC3F841f131d05AAC11D21C2271',
-    '0xA60996bd543A50E3a38f199FD807e5941cF10666',
-    '0x664E8978Bf36f479EC3E3883EA13b60ecF7e4400',
-    '0x4F7579F9BBB7b7f25BDbe73d1302380dFdD74e9B',
-    '0xc19a7731510D4FC92Bf5C1c56FaeC4A8Bd7e0419'
+    '0x36c67aa74daC10a8f31d2a025287670f7c26Ae7c',
+    '0x371d3798aDEA0c839B2396c0a79DC584292ED8Dc',
+    '0x3f42E4Ed29F5a24d91D19c686Fe767EB1583907c'
+
 
 ]
 
 privatekeys = [
-    '0030464ee54f4d94107e1995d1a0aa5b6e1cd361080c7cdaa703c7bfa3fe646b',
-    '2c58dadba5ff418a3425fcaaa1349e540a3edc6c67487c4a68f428366d5966b1',
-    '629986d72dbab950b8421a9c5d297edfdebb53e8b0ed7fcce3f6032b0546d2c5',
-    '24dfa8681e6cba8805b2db7d68ab92f1ebaa163e123945aac8d848bc49c6faff',
-    '456e9ac53395306cdfb0c6b32b614ba7d015b057f6e9a852533305258d12d340',
-    '827c89cb6241eb852a711dac1f6acbecfee2833449a8a750fa307e385820a82d'
+    '570220e67f74b9d7daf28b85bcea528eb4bd8e4032daeaba7e9f67ba945b42f2',
+    'cde8314e9f12fc7b78101958bebee83c0085295b8d056d80a3f0b475aa97337b',
+    'c1df54397c92011e17b505fa4a073d58b51f87dd7ea4cb3eaf5687cc25a34bc8'
+
 ]
 
 vote_tx = []
@@ -44,7 +41,8 @@ voted = []
 ended = 0
 logged = []
 voter_id = 0
-
+admin_user='gourav'
+admin_pass='12345'
 
 
 @app.route("/vote" , methods=['POST'])
@@ -96,8 +94,8 @@ def login():
             ano = int(data["aadhaarNo"])
             print('ano', ano)
 
-            # if(ano in logged):
-            #     return "Already voted",400
+            if(ano in logged):
+                return "Already voted",401
 
             global voter_id
             voter_id+=1
@@ -108,6 +106,20 @@ def login():
             return "Error processing",500
     else:
         return "Election period ended",400
+
+
+@app.route("/admin-login" , methods=['POST'])
+def adminLogin():
+    data = eval(request.data) 
+    username = data["username"]
+    password = data["password"]
+    print('username and password', username, password)
+    print('req username and password', admin_user, admin_pass)
+    if username==admin_user and password==admin_pass:
+        return "Sucessfully Logged In",200
+    else:
+        return "wrong username or password",401
+
 
 
 @app.route("/results" , methods=['GET'])
@@ -122,20 +134,8 @@ def count():
 @app.route("/end" , methods=['POST'])
 def end_election():
     global ended
-    
-    acc = accounts[3]
-    pvt = privatekeys[3]
-    contract = web3.eth.contract(address=contract_addr, abi=abi)
-    print('acc', acc)
-    print('pvt', pvt)
-    transaction  = contract.functions.end().buildTransaction()
-
-    transaction['nonce'] = web3.eth.getTransactionCount(acc)
-
-    signed_tx = web3.eth.account.signTransaction(transaction, pvt)
-    tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     ended += 1
-    return "Election successfully ended\nTx Hash : %s"%(str(tx_hash)),200
+    return "Election successfully ended",200
 
 @app.route("/number_of_users" , methods=['GET'])
 def number_of_users(): 
@@ -148,22 +148,22 @@ def number_of_users():
 def is_ended(): 
     return str(ended>0),200
 
-@app.route("/candidates_list" , methods=['GET'])
-def candidates_list():
-    try:
-        res = []
+# @app.route("/candidates_list" , methods=['GET'])
+# def candidates_list():
+#     try:
+#         res = []
 
-        election = web3.eth.contract(address=contract_addr, abi=abi)
-        print('election', election)
+#         election = web3.eth.contract(address=contract_addr, abi=abi)
+#         print('election', election)
      
-        for i in range(election.caller().candidatesCount()):    
-            res.append(election.caller().candidates(i+1)[1])
-            print('candy', election.caller().candidates(i+1)) 
+#         for i in range(election.caller().candidatesCount()):    
+#             res.append(election.caller().candidates(i+1)[1])
+#             print('candy', election.caller().candidates(i+1)) 
         
-        return json.dumps(res),200
-    except:
-        print('res', res)
-        return "Error processing",500
+#         return json.dumps(res),200
+#     except:
+#         print('res', res)
+#         return "Error processing",500
 
 
         
