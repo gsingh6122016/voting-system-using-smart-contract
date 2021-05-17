@@ -1,5 +1,5 @@
 # Voting System using Smart contract
-> This is a decentralized voting system based on Blockchain technology, which is distribulted over a network using smart contracts.  
+> This is a decentralized voting system based on Blockchain technology, which is distributed over a network using smart contracts.  
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
