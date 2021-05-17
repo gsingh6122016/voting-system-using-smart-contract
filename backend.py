@@ -147,23 +147,6 @@ def number_of_users():
 def is_ended(): 
     return str(ended>0),200
 
-# @app.route("/candidates_list" , methods=['GET'])
-# def candidates_list():
-#     try:
-#         res = []
-
-#         election = web3.eth.contract(address=contract_addr, abi=abi)
-#         print('election', election)
-     
-#         for i in range(election.caller().candidatesCount()):    
-#             res.append(election.caller().candidates(i+1)[1])
-#             print('candy', election.caller().candidates(i+1)) 
-        
-#         return json.dumps(res),200
-#     except:
-#         print('res', res)
-#         return "Error processing",500
-
 
         
 
