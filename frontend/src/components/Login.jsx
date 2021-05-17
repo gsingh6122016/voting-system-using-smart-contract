@@ -60,7 +60,7 @@ export default function Login() {
             <div className='candidates__ctr place__center' >
 
             <div className='candidates__header top__fix' >
-                    <h1>Welcome to Blockchain based Voting App</h1>
+                    <h1>Welcome to Decentralized Voting System</h1>
                 </div>
        
                 <div className='_center' >

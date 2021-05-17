@@ -54,7 +54,7 @@ export default function Admin() {
             <div className='candidates__ctr place__center' >
 
             <div className='candidates__header top__fix' >
-                    <h1>Voting App Admin Panel</h1>
+                    <h1>Admin Panel</h1>
                 </div>
        
                 <div className='_center' >

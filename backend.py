@@ -26,7 +26,6 @@ accounts = [
     '0x371d3798aDEA0c839B2396c0a79DC584292ED8Dc',
     '0x3f42E4Ed29F5a24d91D19c686Fe767EB1583907c'
 
-
 ]
 
 privatekeys = [
