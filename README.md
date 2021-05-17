@@ -1,6 +1,6 @@
 # Voting System using Smart contract
 > This is a decentralized voting system based on Blockchain technology, which is distributed over a network using smart contracts.  
-> Live demo [_here_](https://youtu.be/AyliXUSLXj8). <!-- If you have the project hosted somewhere, include the link here. -->
+> Video Explanation [_here_](https://youtu.be/AyliXUSLXj8). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -20,7 +20,7 @@
 
 
 ## Technologies Used
-- Solidity for writting smart contracts
+- Solidity for writing smart contracts
 - ReactJS for frontend of the application
 - Flask for backend of the application
 - Ganache for deploying contract and providing keys.
@@ -33,16 +33,24 @@ List the ready features here:
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](./screenshots/voter_login.png)
+
+![Example screenshot](./screenshots/candidates_list.png)
+
+![Example screenshot](./screenshots/admin_login.png)
+
+![Example screenshot](./screenshots/admin_dashboard.png)
+
+![Example screenshot](./screenshots/results.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
-Room for improvement:
+## Room for improvement:
 - The voters verification needs to be upgraded to Biomatric means.
 - Candidates listing based on users location using Aadhar API.
 
 
 ## Acknowledgements
-- This project was inspired by need of decentralized systems in the current time to insure security.
+- This project was inspired by need of decentralized systems to insure security and increase transparency.
 - Many thanks to Mr. Kaushik Das Sir, Department of Computer Science and Engineering, Kalyani Government Engineering College.
 
