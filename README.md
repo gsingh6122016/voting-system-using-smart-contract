@@ -15,7 +15,7 @@
 ## General Information
 - This is a decentralized voting system based on Blockchain technology.
 - Voting has always been a hectic process. Earlier all the work was done manually which takes a lot of time. Electronic  voting systems are quite efficient which resolve the timing issue effortlessly, but the problem is that the systems can be hacked, and votes can be tempered, the reason  being  the  centralized  system. 
--  Decentralized  systems  are  more  desirable  then  centralized  systems  as popularized due to distributed ledger technologies such as Smart Contract. Which makes it quite secure.
+-  Decentralized  systems  are  more  desirable  then  centralized  systems  as popularized due to distributed ledger technologies such as Smart Contract. Which makes it quite secure.Here the contract is written in solidity which will get distributed over the whole network so if anyone wants to temper the votes he needs to gain access to more than 50% of the nodes at the same time which is very unlikely.
 
 
 
