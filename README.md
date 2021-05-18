@@ -46,7 +46,7 @@ List the ready features here:
 
 
 ## Room for improvement:
-- The voters verification needs to be upgraded to Biomatric means.
+- The voters and admin verification needs to be upgraded to Biomatric means.
 - Candidates listing based on users location using Aadhar API.
 
 
